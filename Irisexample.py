@@ -2,7 +2,7 @@
 """
 Spyder Editor
 
-This is an example 
+This is an example
 """
 
 # Load libraries
@@ -20,13 +20,12 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-# Load dataset
+#1. Load dataset
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
-dataset = pandas.read_csv(url, names=names)
+headers = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+dataset = pandas.read_csv(url, names=headers)
 
-
-
+#2. Data Visualization
 # box and whisker plots
 dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 plt.show()
@@ -40,16 +39,17 @@ scatter_matrix(dataset)
 plt.show()
 
 
+#3. Data Modelling
 # Split-out validation dataset
 array = dataset.values
 X = array[:,0:4]
 Y = array[:,4]
-validation_size = 0.20
-seed = 7
+validation_size = 0.3
+seed = 8
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
 
 # Test options and evaluation metric
-seed = 7
+seed = 8
 scoring = 'accuracy'
 
 # Spot Check Algorithms
@@ -81,9 +81,9 @@ ax.set_xticklabels(names)
 plt.show()    
 
 # Make predictions on validation dataset
-knn = KNeighborsClassifier()
-knn.fit(X_train, Y_train)
-predictions = knn.predict(X_validation)
+cart = DecisionTreeClassifier()
+cart.fit(X_train, Y_train)
+predictions = cart.predict(X_validation)
 print(accuracy_score(Y_validation, predictions))
 print(confusion_matrix(Y_validation, predictions))
 print(classification_report(Y_validation, predictions))
