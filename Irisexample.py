@@ -21,9 +21,9 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 #1. Load dataset
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-headers = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
-dataset = pandas.read_csv(url, names=headers)
+from sklearn.datasets import load_iris
+sample = load_iris()
+dataset=pandas.DataFrame(sample.data, columns=sample.feature_names)
 
 #2. Data Visualization
 # box and whisker plots
@@ -41,9 +41,9 @@ plt.show()
 
 #3. Data Modelling
 # Split-out validation dataset
-array = dataset.values
-X = array[:,0:4]
-Y = array[:,4]
+#array = dataset.values
+X = sample.data
+Y = sample.target
 validation_size = 0.3
 seed = 8
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
@@ -61,7 +61,7 @@ models.append(('CART', DecisionTreeClassifier()))
 models.append(('NB', GaussianNB()))
 models.append(('SVM', SVC()))
 
-# evaluate each model in turn
+# Evaluate each model in turn
 results = []
 names = []
 for name, model in models:
