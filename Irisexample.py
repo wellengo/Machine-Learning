@@ -61,7 +61,7 @@ models.append(('CART', DecisionTreeClassifier()))
 models.append(('NB', GaussianNB()))
 models.append(('SVM', SVC()))
 
-# Evaluate each model in turn
+# Evaluate each model in turn, using 10-fold cross validation to estimate accuracy
 results = []
 names = []
 for name, model in models:
