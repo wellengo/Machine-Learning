@@ -41,7 +41,6 @@ plt.show()
 
 #3. Data Modelling
 # Split-out validation dataset
-#array = dataset.values
 X = sample.data
 Y = sample.target
 validation_size = 0.3
